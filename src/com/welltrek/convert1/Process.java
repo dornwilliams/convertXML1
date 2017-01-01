@@ -27,11 +27,11 @@ public class Process {
 
         String strIn;
         
-        System.out.println("Starting AdinaConvert 1.1\n");
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println("Starting AdinaConvert 1.2");
+        System.out.println("\tWorking Directory:" + System.getProperty("user.dir"));
 
         for (int i=0; i<args.length; i++)
-        	System.out.printf("Num %d: String %s\n",i,args[i]);
+        	System.out.printf("\tArg %d: %s\n",i,args[i]);
 
         // Validate the input parameters
         if (args.length < 2) {
@@ -49,7 +49,6 @@ public class Process {
             
             // Get a line which ends with string end
             
-
             while ((strIn = tl.readLine(bufferReader)) != null) {
             	String strOut = convertLine.C2P(args[0],strIn);
             	
@@ -58,9 +57,11 @@ public class Process {
             		outputStream.write(strOut);
             }
         } catch (IOException e) {
-        	System.out.printf("Exception : %s\n",e);
+        	System.out.printf("IOException : %s\n",e);
         	e.printStackTrace();
-
+        } catch(Exception e) {
+        	System.out.printf("Exception : %s\n",e);
+    		e.printStackTrace();
         } finally {
         	try {
             if (inputStream != null) {

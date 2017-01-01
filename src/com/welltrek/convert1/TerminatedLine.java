@@ -24,17 +24,17 @@ public class TerminatedLine {
 			strWork = br.readLine();
 			Count++;
 			
-			if (strWork == null)
-				return strWork;
-			
-			if (strWork != null)
+			if (strWork == null && strReturn.length() == 0)
+				return null;
+			else if (strWork == null)
+				return strReturn;
+			else
 				strWork = strWork.trim();
 			
 			strReturn = (strReturn + " " + strWork).trim();
 			
 		} while ((strWork != null &&
-				//strWork.lastIndexOf(ConvertLine.KNonSentenceEnd) == -1 &&
-				strWork.lastIndexOf(ConvertLine.KNonSentenceEnd) + ConvertLine.KNonSentenceEnd.length() != strWork.length()) &&
+				strWork.lastIndexOf(ConvertLine.KNonSentenceEnd_s) + ConvertLine.KNonSentenceEnd_s.length() != strWork.length()) &&
 				!strWork.contains("<?"));
 
 		return(strReturn);
