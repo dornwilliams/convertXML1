@@ -20,7 +20,7 @@ public class ConvertLine {
 	public static final String KNonSentenceEnd_u = "</xces:u>";
 	public static final String KSentenceStart_u = "<xces:u id=";
 
-	public String C2P(String strFile, String strIn) {
+	public String C2P(String strFile, String strIn, Boolean bVerbose) {
 
 		int beginIndex;
 		int endIndex;
@@ -69,24 +69,24 @@ public class ConvertLine {
 					bSentence = false;
 				} else
 					bSentence = true;										// This is truly a sentence
-				
+
 				endIndex = strIn.indexOf("\">");
-				
+
 				// Somewhat unneeded because both sentence and utterance tag start are the same length
 				if (bSentence)
 					strPS = strIn.substring(beginIndex + KSentenceStart_s.length() + 1, endIndex);
 				else
 					strPS = strIn.substring(beginIndex + KSentenceStart_u.length() + 1, endIndex);
-				
+
 				beginIndex = endIndex + 2;								// End of xml tag is start of sentence
-				
+
 				if (bSentence)
 					endIndex = strIn.indexOf(KNonSentenceEnd_s);
 				else
 					endIndex = strIn.indexOf(KNonSentenceEnd_u);
-				
+
 				strWork = strIn.substring(beginIndex, endIndex);
-				
+
 				if (bSentence)
 					strIn = strIn.substring(endIndex + KNonSentenceEnd_s.length());
 				else
@@ -97,7 +97,9 @@ public class ConvertLine {
 			strOut = null;
 		}
 
-		System.out.println(strOut);
+		if (bVerbose)
+			System.out.println(strOut);
+
 		return (strOut);
 	}
 
